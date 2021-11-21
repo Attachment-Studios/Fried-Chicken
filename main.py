@@ -1,13 +1,16 @@
 # main.py
-def execute():
-    input_file = input("Input File: ")
+import tkinter
+from tkinter import *
+from tkinter import ttk, filedialog
+from tkinter.filedialog import askopenfile
 
-    characters = '\n !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~'
+def execute():
     try:
-        file = open(r'{}'.format(input_file), "r")
+        print("---------------------------------")
+        file = askopenfile(mode="r")
         code = file.read()
         file.close()
-
+        characters = '\n !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~'
         if code.lower().replace('fried chicken', '').replace(' ', '').replace('\n', '') == "":
             real_code = ""
             for line in code.split('\n'):
@@ -228,7 +231,12 @@ def cells_execute(__codeline__:str):
 					print("Error in cell::" + str(code.index(pure_command) + 1) + "::" + pure_command)
 					break
 
-# main loop
-while True:
-    execute()
+
+win = tkinter.Tk()
+win.title("Fried Chicken")
+win.configure(padx=20, pady=20)
+btn1 = tkinter.Button(text="Browse Code File And Run In Console", command=execute)
+btn1.pack()
+
+win.mainloop()
 
