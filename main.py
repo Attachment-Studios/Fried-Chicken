@@ -4,7 +4,7 @@ def execute():
 
     characters = '\n !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~'
     try:
-        file = open(input_file, "r")
+        file = open(r'{}'.format(input_file), "r")
         code = file.read()
         file.close()
 
