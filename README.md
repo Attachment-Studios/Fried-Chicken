@@ -2,7 +2,7 @@
 Fried Chicken Programming Language
 
 # How To Run
-Once downloaded and opened, choose any file for for code by putting path to file. Any extensions work. Just make sure the content is of **Fried Chicken**.
+Once downloaded and opened, choose any file for code. Any file extensions work. Just make sure the content is of **Fried Chicken**.
 
 # Overview
 This is a really hard programming language, but maybe this helps.
