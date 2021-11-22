@@ -33,15 +33,13 @@ def execute():
 # cells
 def cells_execute(codeline:str):
     code = []
-    iterated_code = "0skip "
+    iterated_code = ""
     push_to_next_line = ":"
     for character in codeline:
         if character == push_to_next_line:
             code.append(iterated_code)
-            iterated_code = "0skip "
+            iterated_code = ""
         else:
-            if iterated_code == "0skip ":
-                iterated_code = ""
             iterated_code = iterated_code + character
     skip_lines = []
     variables_name = []
