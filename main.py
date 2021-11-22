@@ -42,8 +42,7 @@ def cells_execute(codeline:str):
         else:
             iterated_code = iterated_code + character
     skip_lines = []
-    variables_name = []
-    variables_value = []
+    variables = {}
     for cell in code:
         if " < " in cell:
             cell_sans_keyword = cell.replace("nomenclate ", "")
@@ -51,9 +50,8 @@ def cells_execute(codeline:str):
             variable_value = cell_sans_keyword.replace(variable_name, "")
             variable_value = variable_value.replace(" < ", "")
             if "nomenclate " in cell:
-                variables_name.append(variable_name)
-                variables_value.append("")
-            variables_value[variables_name.index(variable_name)] = variable_value
+                variables[variable_name] = ""
+            variables[variable_name] = variable_value
             skip_lines.append(int(code.index(cell)))
     line = -1
     while line < len(code) - 1:
@@ -64,10 +62,10 @@ def cells_execute(codeline:str):
         if code.index(pure_command) in skip_lines:
             skip_this_line = True
             skip_lines.remove(code.index(pure_command))
-        for name in variables_name:
+        for name in variables.keys():
             if " " + name in command and not skip_this_line:
                 if "endocytosis " not in command and "grow " not in command and "exosmosis " not in command and "multinucleate " not in command and "mitosis " not in command and "meiosis " not in command and "fuse " not in command:
-                    command = command.replace(" " + name, " " + str(variables_value[variables_name.index(name)]))
+                    command = command.replace(" " + name, " " + str(variables[name]))
         cell_contains_error = False
         if not(skip_this_line):
             if "exocytosis " in command:
@@ -75,8 +73,8 @@ def cells_execute(codeline:str):
                 print(output)
             elif "endocytosis " in command:
                 variable_name = command.replace("endocytosis ", "")
-                if variable_name in variables_name:
-                    variables_value[variables_name.index(variable_name)] = input()
+                if variable_name in variables.keys():
+                    variables[variable_name] = input()
                 else:
                     cell_contains_error = True
             elif "skip " in command:
@@ -110,11 +108,11 @@ def cells_execute(codeline:str):
                     add_value = command.replace("eject ", "")
                     add_value = add_value.replace(variable_name + ",", "")
                     try:
-                        variables_value[variables_name.index(variable_name)] = int(variables_value[variables_name.index(variable_name)])
-                        variables_value[variables_name.index(variable_name)] -= int(add_value)
+                        variables[variable_name] = int(variables[variable_name])
+                        variables[variable_name] -= int(add_value)
                     except:
-                        variables_value[variables_name.index(variable_name)] = str(variables_value[variables_name.index(variable_name)])
-                        variables_value[variables_name.index(variable_name)] = variables_value[variables_name.index(variable_name)].replace(str(add_value), "")
+                        variables[variable_name] = str(variables[variable_name])
+                        variables[variable_name] = variables[variable_name].replace(str(add_value), "")
                 except:
                     cell_contains_error = True
             elif "mitosis " in command:
@@ -130,11 +128,11 @@ def cells_execute(codeline:str):
                     add_value = command.replace("mitosis ", "")
                     add_value = add_value.replace(variable_name + ",", "")
                     try:
-                        variables_value[variables_name.index(variable_name)] = int(variables_value[variables_name.index(variable_name)])
-                        variables_value[variables_name.index(variable_name)] /= int(add_value)
+                        variables[variable_name] = int(variables[variable_name])
+                        variables[variable_name] /= int(add_value)
                     except:
-                        variables_value[variables_name.index(variable_name)] = str(variables_value[variables_name.index(variable_name)])
-                        variables_value[variables_name.index(variable_name)] = variables_value[variables_name.index(variable_name)].replace(str(add_value), "")
+                        variables[variable_name] = str(variables[variable_name])
+                        variables[variable_name] = variables[variable_name].replace(str(add_value), "")
                 except:
                     cell_contains_error = True
             elif "grow " in command:
@@ -150,11 +148,11 @@ def cells_execute(codeline:str):
                     add_value = command.replace("grow ", "")
                     add_value = add_value.replace(variable_name + ",", "")
                     try:
-                        variables_value[variables_name.index(variable_name)] = int(variables_value[variables_name.index(variable_name)])
-                        variables_value[variables_name.index(variable_name)] += int(add_value)
+                        variables[variable_name] = int(variables[variable_name])
+                        variables[variable_name] += int(add_value)
                     except:
-                        variables_value[variables_name.index(variable_name)] = str(variables_value[variables_name.index(variable_name)])
-                        variables_value[variables_name.index(variable_name)] += str(add_value)
+                        variables[variable_name] = str(variables[variable_name])
+                        variables[variable_name] += str(add_value)
                 except:
                     cell_contains_error = True
             elif "multinucleate " in command:
@@ -170,11 +168,11 @@ def cells_execute(codeline:str):
                     add_value = command.replace("multinucleate ", "")
                     add_value = add_value.replace(variable_name + ",", "")
                     try:
-                        variables_value[variables_name.index(variable_name)] = int(variables_value[variables_name.index(variable_name)])
-                        variables_value[variables_name.index(variable_name)] *= int(add_value)
+                        variables[variable_name] = int(variables[variable_name])
+                        variables[variable_name] *= int(add_value)
                     except:
-                        variables_value[variables_name.index(variable_name)] = str(variables_value[variables_name.index(variable_name)])
-                        variables_value[variables_name.index(variable_name)] += str(add_value)
+                        variables[variable_name] = str(variables[variable_name])
+                        variables[variable_name] += str(add_value)
                 except:
                     cell_contains_error = True
             elif "fuse " in command:
@@ -190,11 +188,11 @@ def cells_execute(codeline:str):
                     add_value = command.replace("fuse ", "")
                     add_value = add_value.replace(variable_name + ",", "")
                     try:
-                        variables_value[variables_name.index(variable_name)] = float(variables_value[variables_name.index(variable_name)])
-                        variables_value[variables_name.index(variable_name)] *= float(add_value)
+                        variables[variable_name] = float(variables[variable_name])
+                        variables[variable_name] *= float(add_value)
                     except:
-                        variables_value[variables_name.index(variable_name)] = str(variables_value[variables_name.index(variable_name)])
-                        variables_value[variables_name.index(variable_name)] += str(add_value)
+                        variables[variable_name] = str(variables[variable_name])
+                        variables[variable_name] += str(add_value)
                 except:
                     cell_contains_error = True
             elif "meiosis " in command:
@@ -210,11 +208,11 @@ def cells_execute(codeline:str):
                     add_value = command.replace("meiosis ", "")
                     add_value = add_value.replace(variable_name + ",", "")
                     try:
-                        variables_value[variables_name.index(variable_name)] = float(variables_value[variables_name.index(variable_name)])
-                        variables_value[variables_name.index(variable_name)] /= float(add_value)
+                        variables[variable_name] = float(variables[variable_name])
+                        variables[variable_name] /= float(add_value)
                     except:
-                        variables_value[variables_name.index(variable_name)] = str(variables_value[variables_name.index(variable_name)])
-                        variables_value[variables_name.index(variable_name)] = variables_value[variables_name.index(variable_name)].replace(str(add_value), "")
+                        variables[variable_name] = str(variables[variable_name])
+                        variables[variable_name] = variables[variable_name].replace(str(add_value), "")
                 except:
                     cell_contains_error = True
             else:
