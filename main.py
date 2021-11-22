@@ -46,14 +46,9 @@ def cells_execute(codeline:str):
     variables_value = []
     for cell in code:
         if " < " in cell:
-            variable_name = ""
-            for character in cell.replace("nomenclate ", ""):
-                if character == " ":
-                    break
-                else:
-                    variable_name = variable_name + character
-            variable_value = cell.replace("nomenclate ", "")
-            variable_value = variable_value.replace(variable_name, "")
+            cell_sans_keyword = cell.replace("nomenclate ", "")
+            variable_name = cell_sans_keyword[0:cell_sans_keyword.index(" ")]
+            variable_value = cell_sans_keyword.replace(variable_name, "")
             variable_value = variable_value.replace(" < ", "")
             if "nomenclate " in cell:
                 variables_name.append(variable_name)
