@@ -240,4 +240,3 @@ btn1 = tkinter.Button(text="Browse Code File And Run In Console", command=execut
 btn1.pack()
 
 win.mainloop()
-
