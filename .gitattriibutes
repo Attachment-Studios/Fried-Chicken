@@ -1,0 +1,7 @@
+# This configuration should convert CLRF line endings to LF
+# Adapted from the following guide:
+# https://www.aleksandrhovhannisyan.com/blog/crlf-vs-lf-normalizing-line-endings-in-git/#a-simple-gitattributes-config
+*.py text=auto eol=lf
+
+*.{exe,ico,jpg,jpeg,png,gif,webp,woff,woff2,pdf} binary
+
