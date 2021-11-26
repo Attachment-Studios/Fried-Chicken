@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # main.py
 import tkinter
 from tkinter import *
@@ -239,4 +240,3 @@ btn1 = tkinter.Button(text="Browse Code File And Run In Console", command=execut
 btn1.pack()
 
 win.mainloop()
-
